@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>MaxUnit - Unit testing framework</title>
+	<link rel="stylesheet" href="maxUnit.css" />
+</head>
+<body>
+
+	<h1>Welcome to MaxUnit</h1>
+	<div id="results">
+		<h2 style="font-weight: bold;margin-bottom:1em;">
+			Tests:<span data-bind="text: '(Total Failed : ' + TotalFailed() + ')'"></span><span data-bind="text: '(Total Passed: ' + TotalSucceded() + ')'"></span>
+		</h2>
+		<div data-bind="foreach: Results" id="maxUnitResults">
+			<article>
+				<h2 class="expandContract" data-bind="css: { failed: TestResults.FailedTests.length }, click: ExpandContract">
+					<span data-bind="text: 'Test: ' + TestResults.TestClassName"></span>
+					<span data-bind="text: '(failed: ' + TestResults.FailedTests.length + ')'"></span>
+					<span data-bind="text: '(passed: ' + TestResults.PassedTests.length + ')'"></span>
+				</h2>
+
+				<!-- ko if: Expanded -->
+					<!-- ko if:  TestResults.FailedTests.length-->
+					<section id="failed">
+						<h3>Failed</h3>
+						<table class="failed">
+							<thead>
+								<tr>
+									<th>Test Name</th>
+
+									<th>Test Description</th>
+
+									<th>Message</th>
+								</tr>
+							</thead>
+							<tbody id="failedInfo" data-bind="foreach: TestResults.FailedTests">
+								<tr>
+									<td data-bind="text: TestName"></td>
+									<td data-bind="text: TestDescription"></td>
+									<td data-bind="text: Message"></td>
+								</tr>
+							</tbody>
+
+						</table>
+					</section>
+					<!--/ko-->
+					<!-- ko if:  TestResults.PassedTests.length-->
+					<section id="passed">
+						<h3>Passed</h3>
+						<table class="passed">
+							<thead>
+								<tr>
+									<th>Test Name</th>
+
+									<th>Test Description</th>
+
+									<th>Message</th>
+								</tr>
+							</thead>
+							<tbody data-bind="foreach: TestResults.PassedTests">
+								<tr>
+									<td data-bind="text: TestName"></td>
+									<td data-bind="text: TestDescription"></td>
+									<td data-bind="text: Message"></td>
+								</tr>
+							</tbody>
+
+						</table>
+					</section>
+					<!-- /ko-->
+				<!-- /ko-->
+			</article>
+		</div>
+
+	</div>
+	<script src="knockout.js"></script>
+	<script src="require.js"></script>
+	<script src="jquery.js"></script>
+	<script src="maxUnit.js"></script>
+	<script>
+		var renderer = new maxUnit.KOTestRenderer("results");
+		var runner = new maxUnit.TestRunner("tests", renderer);
+		var dfdTests = $.Deferred();
+		require(['tests/tests'], dfdTests.resolve, dfdTests.reject);
+		dfdTests.done(function (tests) {
+			for (var i = 0, len = tests.length; i < len; i++) {
+				runner.AddTest(tests[i]);
+			}
+			runner.Run();
+		})
+		.fail(function () {
+			alert("Cannot load /tests/tests");
+		});
+
+	</script>
+</body>
+</html>

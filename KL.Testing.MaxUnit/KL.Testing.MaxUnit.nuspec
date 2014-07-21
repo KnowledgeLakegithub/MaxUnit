@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>KL.Testing.MaxUnit</id>
+    <version>1.0.0.14</version>
+    <title>KL.Testing.MaxUnit</title>
+    <authors>KnowledgeLake</authors>
+    <owners>KnowledgeLake</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Typescript Testing Framework with Requirejs Isolation</description>
+    <copyright>Copyright 2014</copyright>
+    <tags>KnowledgeLake</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="net40" />
+      <frameworkAssembly assemblyName="System" targetFramework="net45" />
+    </frameworkAssemblies>
+    <dependencies>
+      <dependency id="jquery.TypeScript.DefinitelyTyped" version="0.8.1" />
+      <dependency id="knockout.TypeScript.DefinitelyTyped" version="0.5.0" />
+      <dependency id="requirejs.TypeScript.DefinitelyTyped" version="0.1.7" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src=".\KL.Testing.MaxUnit\Scripts\**" target="content\Scripts\" />
+	  <file src=".\KL.Testing.MaxUnit\Tests\**" target="content\Tests\" />
+	  <file src=".\KL.Testing.MaxUnit\index.html" target="content\index.html" />
+    <file src=".\KL.Testing.MaxUnit\dalek_tests.js" target="content\dalek_tests.js" />
+    <file src=".\KL.Testing.MaxUnit\dalekRunTests.ps1" target="content\dalekRunTests.ps1"/>
+	  <file src=".\KL.Testing.MaxUnit\jquery.js" target="content\jquery.js" />
+	  <file src=".\KL.Testing.MaxUnit\knockout.js" target="content\knockout.js" />
+	  <file src=".\KL.Testing.MaxUnit\maxUnit.css" target="content\maxUnit.css" />
+	  <file src=".\KL.Testing.MaxUnit\maxUnit.ts" target="content\maxUnit.ts" />
+	  <file src=".\KL.Testing.MaxUnit\require.js" target="content\require.js" />
+  </files>  
+</package>
